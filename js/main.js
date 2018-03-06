@@ -10,20 +10,21 @@ searchButton.addEventListener("click", function () {
 		.then(function (search) {
 
 			for (items of search['items']) {
-				console.log(items.volumeInfo.title);
-				console.log(items.volumeInfo.authors);
-				console.log(items.volumeInfo.publishedDate);
-				console.log(items.saleInfo.country);
-				console.log(items.volumeInfo.description);
-				console.log(items.volumeInfo.previewLink)
-				console.log(items.volumeInfo.averageRating);
 
-				// SKAPA IMAGETAG!
-				//console.log(items.volumeInfo.imageLinks.smallThumbnail);
+				var resultList = document.getElementById('resultList');
+				var resultItem = document.createElement('li');
+				resultItem.innerHTML = `<p>Title: ${items.volumeInfo.title}<br/>
+					Author: ${items.volumeInfo.authors}<br/>
+					Published: ${items.volumeInfo.publishedDate}<br/>
+					Country: ${items.saleInfo.country}<br/>
+					Description: ${items.volumeInfo.description}<br/>
+					Google Books link: <a href=${items.volumeInfo.previewLink}>${items.volumeInfo.previewLink}</a><br/>
+					Averagre rating: ${items.volumeInfo.averageRating}<br/>
+					<img src=${items.volumeInfo.imageLinks.smallThumbnail}></p>`;
+				resultList.appendChild(resultItem);
 			}
-			//console.log(search['items'][0]['volumeInfo']['title']);
 		})
-		/*.catch(function (error) {
-			console.log(error);
-		})*/
+	/*.catch(function (error) {
+		console.log(error);
+	})*/
 });
