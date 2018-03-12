@@ -12,12 +12,21 @@ clearButton.addEventListener("click", function () {
 	totalItems.innerHTML = "";
 	for (clearButton of clearButtons){
 	clearButton.style.display = "none";
+	fetchMoreButton.style.display = "none";
 	}
 });
 }
 
 searchButton.addEventListener("click", function () {
+	search = document.getElementById("search").value;
+	if (search.length != 0){
 	fetchBooks();
+	}
+	
+	else {
+		alert("Write something in the input field!");
+	}
+	console.log(search);
 });
 
 fetchMoreButton.addEventListener("click", function () {
@@ -79,9 +88,9 @@ function fetchBooks() {
 			fetchMoreButton.style.display = "inline-block";
 			startIndex = startIndex + 10;
 		})
-	/*.catch(function (error) {
-		console.log(error);
-	})*/
+	.catch(function(error){
+		alert("There has been a problem: ", error.message);
+	})
 }
 
 function fetchMoreBooks() {
@@ -128,6 +137,9 @@ function fetchMoreBooks() {
 			}
 			startIndex = startIndex + 10;
 		})
+	.catch(function(error){
+		alert("There has been a problem: ", error.message);
+	})
 }
 
 var genre;
@@ -223,5 +235,8 @@ function searchGenre () {
 					}
 				})
 			}
+	})
+	.catch(function(error){
+		alert("There has been a problem: ", error.message);
 	})
 }

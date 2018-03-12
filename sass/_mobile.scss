@@ -59,24 +59,34 @@ header {
 }
 
 #headerImage {
-		height: 70px;
-		background-image: url(../images/books.jpeg);
-		background-size: cover;
-		
-	}
+	height: 70px;
+	background-image: url(../images/books.jpeg);
+	background-size: cover;
+
+}
 
 main {
 	margin: 0 8px;
+	
+	#search {
+		margin-bottom: 1rem;
+	}
 	ul {
 		padding-left: 0;
 		margin-top: 1rem;
-		}
+	}
 	li {
-		border: 2px dashed #61CC14; 
-		//background-color: #FFF8DE;
+		border: 2px dashed #61CC14; //background-color: #FFF8DE;
 		padding: 6px;
 		margin-bottom: 10px;
 		border-radius: 5px;
+	}
+	.hidden {
+		display: none;
+	}
+
+	.genre {
+		margin-bottom: .5rem;
 	}
 }
 
@@ -93,12 +103,4 @@ main {
 
 #fetchMoreButton {
 	display: none;
-}
-
-.hidden {
-	display: none;
-}
-
-.genre {
-	margin-bottom: .5rem;
 }
