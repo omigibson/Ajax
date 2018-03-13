@@ -9,6 +9,10 @@ header, main {
 	margin-bottom: 0;
 }
 
+nav ul a {
+	font-size: 1.1rem;
+}
+
 #headerImage {
 	height: 150px;
 }
@@ -18,7 +22,6 @@ header, main {
 	justify-content: space-between;
 	section {
 		width: 46%;
-		text-align: center;
 		margin-top: 10px;
 	}
 }
