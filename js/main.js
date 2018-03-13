@@ -1,29 +1,28 @@
 var searchButton = document.getElementById("searchButton");
 var resultList = document.getElementById('resultList');
 var fetchMoreButton = document.getElementById("fetchMoreButton");
-var search;
 var startIndex = 0;
 var clearButtons = document.getElementsByClassName("clear");
 
 //Functionality of the two buttons that clear the search result. They get event listeners that listens for click, and then they remove everything inside resultList (ul) and totalItems (p).
 for (clearButton of clearButtons){
-clearButton.addEventListener("click", function () {
+	clearButton.addEventListener("click", function () {
 	resultList.innerHTML = "";
 	var totalItems = document.getElementById("totalItems");
 	totalItems.innerHTML = "";
 	//this hides both clear buttons and the Show more button until another searh is made
 	for (clearButton of clearButtons){
-	clearButton.style.display = "none";
-	fetchMoreButton.style.display = "none";
+		clearButton.style.display = "none";
+		fetchMoreButton.style.display = "none";
 	}
 });
 }
 
 //When the search button is clicked it gets the value of the search field and then runs the fetchBooks function. If the user clicked the search button without writing anything in the search field, they get and alert asking them to write something.
 searchButton.addEventListener("click", function () {
-	search = document.getElementById("search").value;
+	let search = document.getElementById("search").value;
 	if (search.length != 0){
-	fetchBooks();
+		fetchBooks(search);
 	}
 	else {
 		alert("Write something in the input field!");
@@ -33,13 +32,14 @@ searchButton.addEventListener("click", function () {
 
 //This button runs the fetchMoreBooks function when clicked. fetchMoreBooks fetches 10 more books and displays them in the resultList (ul).
 fetchMoreButton.addEventListener("click", function () {
-	fetchMoreBooks();
+	let search = document.getElementById("search").value;
+	fetchMoreBooks(search);
 });
 
-function fetchBooks() {
+function fetchBooks(search) {
 	//clearbuttons become visible
 	for (clearButton of clearButtons){
-	clearButton.style.display = "inline-block";
+		clearButton.style.display = "inline-block";
 	}
 	//resultList is cleared of results of earlier searches.
 	resultList.innerHTML = "";
@@ -107,7 +107,7 @@ function fetchBooks() {
 }
 
 //This function is very similar to fetchBooks (see above in code) but is uses startindex in the fetch URL
-function fetchMoreBooks() {
+function fetchMoreBooks(search, startIndex) {
 	fetch('https://www.googleapis.com/books/v1/volumes?q=' + search + '&startIndex=' + startIndex + '&key=AIzaSyDjFVfZ78ssXLZ--xm1jcyd2IHvOF-mcec')
 		.then(function (response) {
 			return response.json();
@@ -115,17 +115,18 @@ function fetchMoreBooks() {
 		.then(function (moreBooks) {
 			for (i = 0; i < moreBooks["items"].length; i++) {
 				var resultItem = document.createElement('li');
-				resultItem.innerHTML = `<p>${startIndex + i + 1}</p>
+				resultItem.innerHTML = `
+					<p>${startIndex + i + 1}</p>
 					<h3>${moreBooks.items[i].volumeInfo.title}</h3>
 					<p><strong>Author:</strong> ${moreBooks.items[i].volumeInfo.authors}<br/>
 					<div class = "hidden">
-					<img id=${moreBooks.items[i].id}"bookImage" src="../images/dummybook.jpeg"><br/>
-					<strong>Published:</strong> ${moreBooks.items[i].volumeInfo.publishedDate}<br/>
-					<strong>Country:</strong> ${moreBooks.items[i].saleInfo.country}<br/>
-					<strong>Category:</strong> ${moreBooks.items[i].volumeInfo.categories}<br/>
-					<strong>Description:</strong> ${moreBooks.items[i].volumeInfo.description}<br/>
-					<strong>Google Books link:</strong> <a href=${moreBooks.items[i].volumeInfo.previewLink}>${moreBooks.items[i].volumeInfo.previewLink}</a><br/>
-					<strong>Average rating:</strong> ${moreBooks.items[i].volumeInfo.averageRating}
+						<img id=${moreBooks.items[i].id}"bookImage" src="../images/dummybook.jpeg"><br/>
+						<strong>Published:</strong> ${moreBooks.items[i].volumeInfo.publishedDate}<br/>
+						<strong>Country:</strong> ${moreBooks.items[i].saleInfo.country}<br/>
+						<strong>Category:</strong> ${moreBooks.items[i].volumeInfo.categories}<br/>
+						<strong>Description:</strong> ${moreBooks.items[i].volumeInfo.description}<br/>
+						<strong>Google Books link:</strong> <a href=${moreBooks.items[i].volumeInfo.previewLink}>${moreBooks.items[i].volumeInfo.previewLink}</a><br/>
+						<strong>Average rating:</strong> ${moreBooks.items[i].volumeInfo.averageRating}
 					</div>
 					<button type="button" class="btn btn-outline-primary btn-sm show">Show more</button>
 					</p>`;
