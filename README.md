@@ -2,9 +2,7 @@ My name is Omi Gibba and I am a Front End Developer student at Medieinstitutet, 
 
 This application is based on the [Google Books API](https://developers.google.com/books/docs/overview). It lets users search for books in the Google Books catalogue. The search results shows title, author, publication date, country, category, description, Google Books link and average rating.
 
-View the project here and here.
-
-länk till projektet live på GitHub Pages samt länk till själva GitHub-repositoriet.
+View the project [here](http://omigibba.se/omi_gibba_ajax/) and [here](https://github.com/omigibson/Ajax).
 
 I have used the following technologies to build this.
 * HTML5
